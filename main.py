@@ -1,13 +1,16 @@
+
 import turtle
 import pandas
 
 screen = turtle.Screen()
 screen.title("U.S. States Game")
 image = "blank_states_img.gif"
-turtle.addshape(image)
+map = turtle.Turtle
+screen.addshape(image)
 turtle.shape(image)
 score = 0
 states = pandas.read_csv("50_states.csv")
+answers = []
 game_is_on = True
 
 while game_is_on:
@@ -16,6 +19,14 @@ while game_is_on:
 
     if answer_state in states.state.values:
         score += 1
-        #screen.write(states.state.values, align = "state.x.values")
+        answers.append(answer_state)
+
+        # Tentativa para escrever a resposta no mapa. Não conseguida !!
+        # print(answers)
+        # x = states[states.state.values == states.x.values]
+        # print(x)
+        # # y = states.y.values
+        # # map.goto(x, y)
+        # #screen.write(states.state.values, align = "left")
     else:
         game_is_on = False
