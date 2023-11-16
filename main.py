@@ -1,23 +1,28 @@
-
 import turtle
 import pandas
 
 screen = turtle.Screen()
 screen.title("U.S. States Game")
 image = "blank_states_img.gif"
-map = turtle.Turtle
 screen.addshape(image)
 turtle.shape(image)
 score = 0
-states = pandas.read_csv("50_states.csv")
+data = pandas.read_csv("50_states.csv")
+all_states = data.state.to_list()
 answers = []
-game_is_on = True
 
-while game_is_on:
-    answer_state = screen.textinput(title=f"{score}/50 Guess The State", prompt="What's another state's name?").capitalize()
-    print(answer_state)
 
-    if answer_state in states.state.values:
+while len(answers) < 50:
+    answer_state = (screen.textinput(title=f"{score}/50 Guess The State", prompt="What's another state's name?")
+                    .capitalize())
+
+    if answer_state in all_states:
+        t = turtle.Turtle()
+        t.hideturtle()
+        t.penup()
+        state_data = data[data.state == answer_state]
+        t.goto(int(state_data.x), int(state_data.y))
+        t.write(answer_state)
         score += 1
         answers.append(answer_state)
 
@@ -27,6 +32,5 @@ while game_is_on:
         # print(x)
         # # y = states.y.values
         # # map.goto(x, y)
-        # #screen.write(states.state.values, align = "left")
-    else:
-        game_is_on = False
+        # map.write(arg="Home = ", move=True, align="center")
+        # Map.write_name()
