@@ -14,7 +14,7 @@ answers = []
 
 while len(answers) < 50:
     answer_state = (screen.textinput(title=f"{score}/50 Guess The State", prompt="What's another state's name?")
-                    .capitalize())
+                    .title())
 
     if answer_state in all_states:
         t = turtle.Turtle()
